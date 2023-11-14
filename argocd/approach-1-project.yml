@@ -1,0 +1,26 @@
+# https://www.reddit.com/r/ArgoCD/comments/15nlbs9/is_it_possible_to_create_argocd_accounts_for_the/
+# https://github.com/mabusaa/argocd-course-apps-definitions/blob/main/applications%20and%20projects/project%20-%20role.yaml
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: mydefault
+  namespace: argocd
+spec:
+  sourceRepos:
+  - '*'
+  
+  destinations:
+  - namespace: '*'
+    server: '*'
+  
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  
+  roles:
+  - name: mydefault-role
+    description: Testing project roles with granular project access
+    policies:
+    - p, alice, applications, *, mydefault/bw-go-demo-dev, allow
+    - p, alice, applications, *, mydefault/bw-go-demo-test, allow

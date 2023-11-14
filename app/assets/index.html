@@ -18,10 +18,33 @@
             -webkit-user-select: none;
             user-select: none;
         }
+        #text-container {
+            position: absolute;
+            top: 40%; /* Adjust the position as needed */
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font-size: 2em; /* Adjust the font size as needed */
+            font-weight: 200;
+        }
+
+        @media screen and (max-width: 600px) {
+            h1,
+            #text-container {
+                top: 50%;
+            }
+
+            #text-container {
+                font-size: 1.5em;
+            }
+        }
     </style>
 </head>
 <body>
     <h1>Welcome to ZBI Kubernetes</h1>
+    <div id="text-container">
+        <p>From: <span style="color: #ff9999;">{{APP_LOCATION}}</span></p>
+    </div>
     <canvas id="zbik8s"></canvas>
     <script>
         // helper functions
