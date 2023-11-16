@@ -23,7 +23,7 @@ spec:
       kind: '*'
   
   roles:
-  - name: mydefault-role
+  - name: go-demo-role
     description: Testing project roles with granular project access
     policies:
     - p, alice, applications, *, go-demo/*, allow

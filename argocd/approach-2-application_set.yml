@@ -21,7 +21,7 @@ spec:
       name: '{{cluster}}-{{namespace}}'
       namespace: argocd
     spec:
-      project: mydefault
+      project: go-demo
       source:
         repoURL: https://github.com/seannguyn/go-demo.git
         targetRevision: main
