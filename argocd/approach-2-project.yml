@@ -12,11 +12,11 @@ spec:
   
   destinations:
   - namespace: 'go-demo-dev'
-    server: 'https://127.0.0.1:39569'
+    server: 'https://kubernetes.default.svc'
   - namespace: 'go-demo-test'
-    server: 'https://127.0.0.1:39569'
+    server: 'https://kubernetes.default.svc'
   - namespace: 'go-demo-prod'
-    server: 'https://127.0.0.1:39569'
+    server: 'https://kubernetes.default.svc'
   
   clusterResourceWhitelist:
     - group: '*'
