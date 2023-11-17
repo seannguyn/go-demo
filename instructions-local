@@ -1,0 +1,55 @@
+# OPEN VSCODE
+
+minikube start --driver=docker
+
+eval $(minikube docker-env)
+
+docker build -t go-demo .
+
+docker run -p 6062:8080 go-demo
+
+kubectl create ns argocd
+
+minikube dashboard
+
+# OPEN another tab
+
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+
+ARGOCD_PASSWORD=""
+
+kubectl port-forward service/argocd-server 8080:443 -n argocd
+
+# OPEN another tab
+
+kubectl apply -f argocd/users.yml
+
+argocd login 127.0.0.1:8080
+
+argocd account update-password \
+  --account alice \
+  --current-password xP-y6XKLj5GurWNI \
+  --new-password xP-y6XKLj5GurWNI
+
+argocd account update-password \
+  --account bob \
+  --current-password xP-y6XKLj5GurWNI \
+  --new-password xP-y6XKLj5GurWNI
+
+kubectl apply -f argocd/approach-1-project.yml
+kubectl apply -f argocd/approach-1-application_set.yml
+
+kubectl delete -f argocd/approach-1-project.yml
+kubectl delete -f argocd/approach-1-application_set.yml
+
+kubectl apply -f argocd/approach-2-project.yml
+kubectl apply -f argocd/approach-2-application_set.yml
+
+kubectl delete -f argocd/approach-2-project.yml
+kubectl delete -f argocd/approach-2-application_set.yml
+
+# ====================================================================================
+
+minikube delete --all

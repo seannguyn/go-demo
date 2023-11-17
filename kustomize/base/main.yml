@@ -21,12 +21,6 @@ spec:
       - name: go-demo
         image: go-demo:latest
         imagePullPolicy: Never
-        env:
-        - name: APP_LOCATION
-          valueFrom:
-            configMapKeyRef:
-              name: go-demo-configmap
-              key: APP_LOCATION
         resources:
           requests:
             cpu: 100m
@@ -47,10 +41,3 @@ spec:
   - port: 80
     targetPort: 8080
     protocol: TCP
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: go-demo-configmap
-data:
-  APP_LOCATION: kubernetes.default.svc
